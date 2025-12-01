@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "name": "harukaalbum",
-  "artists": ["HARUKAFNF"],
-  "albumArtAsset": "freeplay/albumRoll/harukaalbum",
-  "albumTitleAsset": "freeplay/albumRoll/haruka-text"
+  "name": "thothalbum",
+  "artists": ["Rhap5ody"],
+  "albumArtAsset": "freeplay/albumRoll/thothalbum",
+  "albumTitleAsset": "freeplay/albumRoll/thoth-text"
 }
