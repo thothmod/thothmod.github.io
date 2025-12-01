@@ -1,15 +1,16 @@
 {
-  "title": "VS HARUKA[V-Slice] v1.2 Finaly Update",
-  "description": "Japanese OC Mods Yeahhhhhhhhhhhhh",
-  "author": "HARUKAFNF",
+  "title": "VS T.H.O.T.H",
+  "description": "2 week mod made for mobile!!",
+  "author": "Rhap5ody",
   "contributors": [
     {
-      "name": "HARUKAFNF",
-      "role": "Character and Almost All Roles",
-      "url": "https://x.com/harukajpfnf_x"
+      "name": "Rhap5ody",
+      "role": "author",
+      "url": "https://thothmod.github.io/index.html"
     }
   ],
   "api_version": "0.6.4",
   "mod_version": "1.0.0",
   "license": "Apache-2.0"
+
 }
