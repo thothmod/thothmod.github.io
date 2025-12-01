@@ -5,6 +5,9 @@
 - finish self-conscious charts + json
 - finish aftershadow charts + json
 - make spritesheet and xml for FINAL version of thoth.png
--
--
--
+- make custom gf xml and spritesheet
+- make custom bf xml and spritesheet
+- make custom pico xml and spritesheet
+- make custom nene xml and spritesheet
+  
+- after finishing week1 work on slackrr (week2)
