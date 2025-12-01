@@ -41,3 +41,18 @@ body {
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+/* Disable text selection */
+* {
+    user-select: none;
+}
+
+/* Image grows on hover */
+img {
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.08);
+}
+
