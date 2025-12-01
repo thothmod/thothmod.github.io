@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="haruka-text.png">
+<SubTexture name="idle0000" x="0" y="0" width="269" height="96" frameX="-20" frameY="-4" frameWidth="299" frameHeight="104" />
+<SubTexture name="switch0000" x="0" y="96" width="269" height="96" frameX="-20" frameY="-1" frameWidth="299" frameHeight="104" />
+<SubTexture name="switch0001" x="0" y="96" width="269" height="96" frameX="-20" frameY="-1" frameWidth="299" frameHeight="104" />
+<SubTexture name="switch0002" x="0" y="96" width="269" height="96" frameX="-20" frameY="-1" frameWidth="299" frameHeight="104" />
+</TextureAtlas>
