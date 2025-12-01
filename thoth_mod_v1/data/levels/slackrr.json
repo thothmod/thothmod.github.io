@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "Slackrr",
+  "name": "vs Slackrr",
   "titleAsset": "storymenu/titles/weekslackrr",
   "visible":true,
   "props": [
@@ -16,3 +16,4 @@
     "silver platter",
     "N"
   ]}
+
