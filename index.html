@@ -44,7 +44,23 @@
 <!-- JSZip + FileSaver -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script>
+// Parallax background script
+// This script makes the background image move slightly based on mouse movement.
 
+// Adjust these values to change movement intensity
+const intensity = 20; // higher = more movement, lower = subtle
+
+window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * intensity;
+    const y = (e.clientY / window.innerHeight - 0.5) * intensity;
+
+    document.body.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+});
+
+// Ensure background color stays solid red (#ff0000)
+document.body.style.backgroundColor = '#ff0000';
+</script>
 <script>
 /* Status message */
 function showStatus(msg, cls = "bg-slate-700") {
