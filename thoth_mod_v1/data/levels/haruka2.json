@@ -1,15 +1,18 @@
 {
   "version": "1.0.0",
-  "name": "vs haruka Revenge!",
-  "titleAsset": "storymenu/titles/weekharuka",
+  "name": "Slackrr",
+  "titleAsset": "storymenu/titles/weekslackrr",
   "visible":true,
   "props": [
     {
-      "assetPath": "storymenu/props/menu_weekharuka2",
+      "assetPath": "storymenu/props/menu_weekslackrr",
       "scale": 1.0,
       "offsets": [0, 70]
     }
   ],
   "background": "#000000",
-  "songs": ["ordinary attack 2"]
-}
+  "songs": [
+    "slackrr",
+    "silver platter",
+    "N"
+  ]}
