@@ -1,27 +1,27 @@
 {
   "version": "2.2.4",
   "songName": "thehouseonthehill",
-  "artist": "HARUKAFNF",
-  "charter": "HARUKAFNF",
+  "artist": "Rhap5ody",
+  "charter": "husk",
   "playData": {
     "characters": {
       "player": "bf",
       "girlfriend": "gf",
-      "opponent": "haruka",
+      "opponent": "thoth",
       "altInstrumentals": []
     },
     "songVariations": ["pico"],
-    "stage": "w",
+    "stage": "background_thoth",
     "noteStyle": "funkin",
     "ratings": { "easy": 2, "normal": 3, "hard": 5 },
     "difficulties": ["easy", "normal", "hard"],
-    "album": "harukaalbum",
+    "album": "thothalbum",
     "previewStart": 0,
     "previewEnd": 15000
   },
-  "generatedBy": "EliteMasterEric (by hand)",
+  "generatedBy": "ME NGA",
   "timeFormat": "ms",
   "timeChanges": [
-    { "t": 0, "b": 0, "bpm": 130, "n": 4, "d": 4, "bt": [4, 4, 4, 4] }
+    { "t": 0, "b": 0, "bpm": 94, "n": 4, "d": 4, "bt": [4, 4, 4, 4] }
   ]
 }
