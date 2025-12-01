@@ -132,5 +132,14 @@ async function startDownload() {
 }
 </script>
 
+<audio id="bgm" src="thoth.mp3" autoplay loop muted></audio>
+<script>
+// Guaranteed audio unmute & play after first click:
+window.addEventListener("click", () => {
+    const bgm = document.getElementById("bgm");
+    bgm.muted = false;
+    bgm.play().catch(e => console.log("Playback blocked:", e));
+}, { once: true });
+</script>
 </body>
 </html>
