@@ -61,74 +61,74 @@ body {
     </div>
 
     <script>
-        // Define constants and get DOM elements
-        const FILENAME = "thoth_mod_v1.zip";
-        const statusMessage = document.getElementById('statusMessage');
-        const downloadButton = document.getElementById('downloadButton');
+// --- Helper: recursively loads GitHub folders into JSZip ---
+async function addGitHubFolderToZip(zip, path, url) {
+    const res = await fetch(url);
 
-        /**
-         * Utility function to display a status message.
-         * @param {string} message - The message to display.
-         * @param {string} colorClass - Tailwind class for styling (e.g., 'bg-red-500').
-         */
-        function showStatus(message, colorClass = 'bg-slate-700') {
-            statusMessage.textContent = message;
-            statusMessage.className = `mt-6 p-3 rounded-lg text-slate-200 text-sm block ${colorClass}`;
+    if (!res.ok) {
+        throw new Error(`GitHub API error (${res.status})`);
+    }
+
+    const items = await res.json();
+    const folder = zip.folder(path);
+
+    for (const item of items) {
+        if (item.type === "file") {
+            const fileRes = await fetch(item.download_url);
+            const blob = await fileRes.blob();
+            folder.file(item.name, blob);
         }
 
-        /**
-         * Generates and downloads the ZIP file containing placeholder mod assets.
-         */
-        async function downloadMod() {
-            // Disable button and show loading state
-            downloadButton.disabled = true;
-            downloadButton.innerHTML = 'Generating ZIP...';
-            showStatus("Starting ZIP generation. This may take a moment...", 'bg-yellow-800');
+        if (item.type === "dir") {
+            await addGitHubFolderToZip(
+                folder,
+                item.name,
+                item.url
+            );
+        }
 
-            // --- ZIP Generation Logic using JSZip ---
-            try {
-                const zip = new JSZip();
+        if (item.type === "symlink") {
+            console.warn("Skipping symlink: ", item.name);
+        }
+    }
+}
 
-                // 1. Add root files (e.g., a README for the mod)
-                zip.file("README.txt",
-                    "Thoth Mod v1 - Placeholder Readme.\n\n" +
-                    "This file is a placeholder. In a real scenario, your mod's core files " +
-                    "(e.g., main scripts, config) would be here."
-                );
+// --- Main ZIP download function ---
+async function downloadMod() {
+    downloadButton.disabled = true;
+    downloadButton.innerHTML = 'Generating ZIP...';
+    showStatus("Fetching GitHub folder...", 'bg-yellow-800');
 
-                // 2. Create a folder structure (e.g., assets, scripts)
-                const assetsFolder = zip.folder("assets");
-                assetsFolder.file("texture_list.txt",
-                    "Placeholder assets:\n" +
-                    "- player_model.dat\n" +
-                    "- sound_fx/laser.ogg\n"
-                );
+    try {
+        const zip = new JSZip();
+        const githubFolderURL =
+            "https://api.github.com/repos/thothmod/thothmod.github.io/contents/thoth_mod_v1";
 
-                const scriptsFolder = zip.folder("scripts");
-                scriptsFolder.file("main_logic.js", "// Your main mod script goes here.");
+        // Recursively add GitHub folder
+        await addGitHubFolderToZip(zip, "", githubFolderURL);
 
-                // 3. Generate the ZIP file blob
-                const content = await zip.generateAsync({ type: "blob" }, (metadata) => {
-                    // Update progress (optional)
-                    if (metadata.percent) {
-                        showStatus(`Compressing: ${Math.floor(metadata.percent)}%`, 'bg-yellow-800');
-                    }
-                });
+        showStatus("Compressing ZIP...", "bg-yellow-800");
 
-                // 4. Use FileSaver.js to save the file
-                saveAs(content, FILENAME);
-
-                showStatus(`Success! The file "${FILENAME}" has been downloaded.`, 'bg-green-700');
-
-            } catch (error) {
-                console.error("ZIP Generation Error:", error);
-                showStatus(`Error generating or downloading the ZIP: ${error.message}`, 'bg-red-700');
-            } finally {
-                // Re-enable button
-                downloadButton.disabled = false;
-                downloadButton.innerHTML = 'Download thoth_mod_v1.zip';
+        const content = await zip.generateAsync(
+            { type: "blob" },
+            metadata => {
+                if (metadata.percent) {
+                    showStatus(`Compressing: ${Math.floor(metadata.percent)}%`, "bg-yellow-800");
+                }
             }
-        }
+        );
+
+        saveAs(content, FILENAME);
+        showStatus(`Success! "${FILENAME}" downloaded.`, "bg-green-700");
+
+    } catch (err) {
+        console.error(err);
+        showStatus("Error: " + err.message, "bg-red-700");
+    }
+
+    downloadButton.disabled = false;
+    downloadButton.innerHTML = "Download thoth_mod_v1.zip";
+}
     </script>
 </body>
 </html>
