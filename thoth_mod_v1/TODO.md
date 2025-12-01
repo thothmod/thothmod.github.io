@@ -9,5 +9,5 @@
 - make custom bf xml and spritesheet
 - make custom pico xml and spritesheet
 - make custom nene xml and spritesheet
-  - 0 - 0 - 0 - 0 - 0 - 0 - 0 - 0 - 0 -
+- 0 - 0 - 0 - 0 - 0 - 0 - 0 - 0 - 0 -
 - after finishing week1 work on slackrr (week2)
