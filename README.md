@@ -7,3 +7,9 @@
 [![Friday Night Funkin' Vs T.H.O.T.H](https://raw.githubusercontent.com/thothmod/thothmod/main/overview.png)](https://thothmod.github.io)
 # VISIT GAMEBANANA PAGE HERE!
 [![Friday Night Funkin' Vs T.H.O.T.H](gamebanana.gif)]()
+## Contributers:
+<a href="https://github.com/thothmod/thothmod.github.io/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=thothmod/thothmod.github.io" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
