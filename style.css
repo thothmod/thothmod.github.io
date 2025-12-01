@@ -1,14 +1,15 @@
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
-/* Background stays fixed */
+/* Solid red background + parallax-ready image */
 body {
     font-family: 'Inter', sans-serif;
+    background-color: #ff0000; /* Solid red */
     background-image: url('https://raw.githubusercontent.com/thothmod/thothmod.github.io/main/images/background.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed; /* Required for parallax illusion */
 }
 
 /* Main glassy container */
