@@ -16,7 +16,7 @@
 			"name": "w",
 			"flipY": false,
 			"isPixel": false,
-			"assetPath": "w/images/w",
+			"assetPath": "background/images/background_thoth",
 			"scroll": [
 				0.9,
 				0.9
@@ -62,5 +62,5 @@
 			]
 		}
 	},
-	"name": "w stage"
+	"name": "thoth stage"
 }
