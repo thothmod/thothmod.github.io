@@ -4,131 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friday Night Funkin' Thoth Mod v1 Download & Demo Release</title>
-    <!-- Load Tailwind CSS -->
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load JSZip for dynamic ZIP file generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <!-- Load FileSaver.js (or an equivalent utility) for saving the generated file -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Custom Fonts + Background -->
     <style>
-        /* Custom styles for the Inter font and overall body look */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-body {
-  background-image: url('background.jpg'); /* */
-  background-repeat: no-repeat; /* */
-  background-position: center center; /* */
-  background-size: cover; /* */
-  background-attachment: fixed; /* */
-  background-color: #ff0000; /* Fallback color */
-}
+            background-image: url('background.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #ff0000;
         }
     </style>
 </head>
+
 <body class="flex items-center justify-center min-h-screen p-4">
 
     <div class="bg-slate-800 p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-lg text-center">
+
         <!-- Header -->
         <img src="images/title-shortened.png" />
-        <p class="text-slate-300 mb-8 text-lg">
-            Mod Assets & Playtest Access
-        </p>
+        <p class="text-slate-300 mb-8 text-lg">Mod Assets & Playtest Access</p>
 
-        <!-- Mod Download Button -->
-        <button id="downloadButton" onclick="downloadMod()"
-                class="w-full mb-4 px-6 py-3 text-xl font-bold rounded-lg shadow-lg
-                       bg-green-600 hover:bg-green-700 text-white
-                       transition duration-300 transform hover:scale-[1.02]
-                       focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
-            Download thoth_mod_v1.zip
+        <!-- Download Button -->
+        <button id="downloadButton" onclick="startDownload()"
+            class="w-full mb-4 px-6 py-3 text-xl font-bold rounded-lg shadow-lg
+                   bg-green-600 hover:bg-green-700 text-white
+                   transition duration-300 transform hover:scale-[1.02]
+                   focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
+            Download All Mod Files
         </button>
 
         <!-- Demo Button -->
         <a href="demo.html"
-           class="inline-block w-full px-6 py-3 text-xl font-bold rounded-lg shadow-lg
-                  bg-indigo-600 hover:bg-indigo-700 text-white
-                  transition duration-300 transform hover:scale-[1.02]
-                  focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+            class="inline-block w-full px-6 py-3 text-xl font-bold rounded-lg shadow-lg
+                   bg-indigo-600 hover:bg-indigo-700 text-white
+                   transition duration-300 transform hover:scale-[1.02]
+                   focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
             Play Test Demo
         </a>
 
-        <!-- Status Message Box -->
-        <div id="statusMessage" class="mt-6 p-3 rounded-lg text-slate-200 text-sm hidden bg-slate-700">
-            <!-- Messages will appear here -->
-        </div>
+        <!-- Status -->
+        <div id="statusMessage"
+            class="mt-6 p-3 rounded-lg text-slate-200 text-sm hidden bg-slate-700"></div>
 
     </div>
 
-    <script>
-// --- Helper: recursively loads GitHub folders into JSZip ---
-async function addGitHubFolderToZip(zip, path, url) {
-    const res = await fetch(url);
+<!-- JSZip + FileSaver -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-    if (!res.ok) {
-        throw new Error(`GitHub API error (${res.status})`);
-    }
+<script>
+/* Status message */
+function showStatus(msg, cls = "bg-slate-700") {
+    const box = document.getElementById("statusMessage");
+    box.className = "mt-6 p-3 rounded-lg text-slate-200 text-sm " + cls;
+    box.textContent = msg;
+    box.classList.remove("hidden");
+}
+
+/* Recursively walk GitHub folders and insert files into ZIP */
+async function addFolderToZip(zip, apiURL, basePath = "") {
+    const res = await fetch(apiURL);
+    if (!res.ok) throw new Error("GitHub API error: " + res.status);
 
     const items = await res.json();
-    const folder = zip.folder(path);
 
     for (const item of items) {
+        const relativePath = item.path.replace("thoth_mod_v1/", "");
+
         if (item.type === "file") {
+            showStatus(`Adding file: ${relativePath}`, "bg-yellow-800");
+
             const fileRes = await fetch(item.download_url);
             const blob = await fileRes.blob();
-            folder.file(item.name, blob);
+
+            zip.file(relativePath, blob);
         }
 
-        if (item.type === "dir") {
-            await addGitHubFolderToZip(
-                folder,
-                item.name,
-                item.url
-            );
-        }
+        else if (item.type === "dir") {
+            showStatus(`Entering folder: ${relativePath}`, "bg-blue-800");
 
-        if (item.type === "symlink") {
-            console.warn("Skipping symlink: ", item.name);
+            const sub = zip.folder(relativePath);
+            await addFolderToZip(sub, item.url, relativePath);
         }
     }
 }
 
-// --- Main ZIP download function ---
-async function downloadMod() {
-    downloadButton.disabled = true;
-    downloadButton.innerHTML = 'Generating ZIP...';
-    showStatus("Fetching GitHub folder...", 'bg-yellow-800');
+/* Main function */
+async function startDownload() {
+    const btn = document.getElementById("downloadButton");
+    btn.disabled = true;
+    btn.innerHTML = "Building ZIP...";
+
+    showStatus("Fetching GitHub folder list...", "bg-yellow-800");
+
+    const zip = new JSZip();
 
     try {
-        const zip = new JSZip();
-        const githubFolderURL =
-            "https://api.github.com/repos/thothmod/thothmod.github.io/contents/thoth_mod_v1";
-
-        // Recursively add GitHub folder
-        await addGitHubFolderToZip(zip, "", githubFolderURL);
-
-        showStatus("Compressing ZIP...", "bg-yellow-800");
-
-        const content = await zip.generateAsync(
-            { type: "blob" },
-            metadata => {
-                if (metadata.percent) {
-                    showStatus(`Compressing: ${Math.floor(metadata.percent)}%`, "bg-yellow-800");
-                }
-            }
+        await addFolderToZip(
+            zip,
+            "https://api.github.com/repos/thothmod/thothmod.github.io/contents/thoth_mod_v1"
         );
 
-        saveAs(content, FILENAME);
-        showStatus(`Success! "${FILENAME}" downloaded.`, "bg-green-700");
+        showStatus("Generating ZIP file...", "bg-indigo-800");
 
-    } catch (err) {
+        const content = await zip.generateAsync({ type: "blob" });
+
+        saveAs(content, "thoth_mod_v1.zip");
+
+        showStatus("ZIP complete! Download should begin now.", "bg-green-800");
+    }
+    catch (err) {
         console.error(err);
-        showStatus("Error: " + err.message, "bg-red-700");
+        showStatus("Error: " + err.message, "bg-red-800");
     }
 
-    downloadButton.disabled = false;
-    downloadButton.innerHTML = "Download thoth_mod_v1.zip";
+    btn.disabled = false;
+    btn.innerHTML = "Download All Mod Files";
 }
-    </script>
+</script>
+
 </body>
 </html>
