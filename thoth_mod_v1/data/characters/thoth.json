@@ -16,7 +16,7 @@
 	"isPixel": false,
 	"singTime": 4,
 	"startingAnimation": "idle",
-	"assetPath": "characters/haruka",
+	"assetPath": "characters/thoth",
 	"healthIcon": {
 		"isPixel": false,
 		"offsets": [
@@ -24,7 +24,7 @@
 			0
 		],
 		"scale": 1,
-		"id": "haruka",
+		"id": "thoth",
 		"flipX": false
 	},
 	"animations": [
