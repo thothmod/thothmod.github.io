@@ -1,0 +1,10 @@
+- make a favicon for the website
+- finish thoth charts + json
+- add custom Inst + bf & pico Inst (only need 3 main to repeat across songs)
+- Build DEMO Pc Version
+- finish self-conscious charts + json
+- finish aftershadow charts + json
+- make spritesheet and xml for FINAL version of thoth.png
+-
+-
+-
