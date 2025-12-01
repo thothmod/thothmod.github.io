@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoth Mod Download & Demo</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load JSZip for dynamic ZIP file generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- Load FileSaver.js (or an equivalent utility) for saving the generated file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        /* Custom styles for the Inter font and overall body look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate-900 for dark theme */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-slate-800 p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-lg text-center">
+        <!-- Header -->
+        <h1 class="text-4xl font-extrabold text-blue-400 mb-2 tracking-tight">
+            Thoth Project
+        </h1>
+        <p class="text-slate-300 mb-8 text-lg">
+            Mod Assets & Playtest Access
+        </p>
+
+        <!-- Mod Download Button -->
+        <button id="downloadButton" onclick="downloadMod()"
+                class="w-full mb-4 px-6 py-3 text-xl font-bold rounded-lg shadow-lg
+                       bg-green-600 hover:bg-green-700 text-white
+                       transition duration-300 transform hover:scale-[1.02]
+                       focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
+            Download thoth_mod_v1.zip
+        </button>
+
+        <!-- Demo Button -->
+        <a href="demo.html"
+           class="inline-block w-full px-6 py-3 text-xl font-bold rounded-lg shadow-lg
+                  bg-indigo-600 hover:bg-indigo-700 text-white
+                  transition duration-300 transform hover:scale-[1.02]
+                  focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+            Play Test Demo
+        </a>
+
+        <!-- Status Message Box -->
+        <div id="statusMessage" class="mt-6 p-3 rounded-lg text-slate-200 text-sm hidden bg-slate-700">
+            <!-- Messages will appear here -->
+        </div>
+
+    </div>
+
+    <script>
+        // Define constants and get DOM elements
+        const FILENAME = "thoth_mod_v1.zip";
+        const statusMessage = document.getElementById('statusMessage');
+        const downloadButton = document.getElementById('downloadButton');
+
+        /**
+         * Utility function to display a status message.
+         * @param {string} message - The message to display.
+         * @param {string} colorClass - Tailwind class for styling (e.g., 'bg-red-500').
+         */
+        function showStatus(message, colorClass = 'bg-slate-700') {
+            statusMessage.textContent = message;
+            statusMessage.className = `mt-6 p-3 rounded-lg text-slate-200 text-sm block ${colorClass}`;
+        }
+
+        /**
+         * Generates and downloads the ZIP file containing placeholder mod assets.
+         */
+        async function downloadMod() {
+            // Disable button and show loading state
+            downloadButton.disabled = true;
+            downloadButton.innerHTML = 'Generating ZIP...';
+            showStatus("Starting ZIP generation. This may take a moment...", 'bg-yellow-800');
+
+            // --- ZIP Generation Logic using JSZip ---
+            try {
+                const zip = new JSZip();
+
+                // 1. Add root files (e.g., a README for the mod)
+                zip.file("README.txt",
+                    "Thoth Mod v1 - Placeholder Readme.\n\n" +
+                    "This file is a placeholder. In a real scenario, your mod's core files " +
+                    "(e.g., main scripts, config) would be here."
+                );
+
+                // 2. Create a folder structure (e.g., assets, scripts)
+                const assetsFolder = zip.folder("assets");
+                assetsFolder.file("texture_list.txt",
+                    "Placeholder assets:\n" +
+                    "- player_model.dat\n" +
+                    "- sound_fx/laser.ogg\n"
+                );
+
+                const scriptsFolder = zip.folder("scripts");
+                scriptsFolder.file("main_logic.js", "// Your main mod script goes here.");
+
+                // 3. Generate the ZIP file blob
+                const content = await zip.generateAsync({ type: "blob" }, (metadata) => {
+                    // Update progress (optional)
+                    if (metadata.percent) {
+                        showStatus(`Compressing: ${Math.floor(metadata.percent)}%`, 'bg-yellow-800');
+                    }
+                });
+
+                // 4. Use FileSaver.js to save the file
+                saveAs(content, FILENAME);
+
+                showStatus(`Success! The file "${FILENAME}" has been downloaded.`, 'bg-green-700');
+
+            } catch (error) {
+                console.error("ZIP Generation Error:", error);
+                showStatus(`Error generating or downloading the ZIP: ${error.message}`, 'bg-red-700');
+            } finally {
+                // Re-enable button
+                downloadButton.disabled = false;
+                downloadButton.innerHTML = 'Download thoth_mod_v1.zip';
+            }
+        }
+    </script>
+</body>
+</html>
+
