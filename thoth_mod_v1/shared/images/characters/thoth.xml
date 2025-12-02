@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="thoth.png">
-	<!-- Created using the Spritesheet and XML generator -->
-	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="down10000" x="1631" y="551" width="310" height="507" frameX="-344" frameY="-273" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="down20000" x="676" y="573" width="305" height="511" frameX="-346" frameY="-268" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="idle10000" x="984" y="0" width="328" height="537" frameX="-327" frameY="-243" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="idle20000" x="984" y="537" width="323" height="541" frameX="-329" frameY="-238" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="idle30000" x="1312" y="0" width="319" height="542" frameX="-332" frameY="-237" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="idle40000" x="1312" y="542" width="319" height="541" frameX="-332" frameY="-238" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="idle50000" x="1312" y="542" width="319" height="541" frameX="-332" frameY="-238" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="left10000" x="0" y="0" width="338" height="559" frameX="-312" frameY="-221" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="left20000" x="338" y="0" width="338" height="556" frameX="-317" frameY="-224" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="right10000" x="310" y="559" width="321" height="558" frameX="-354" frameY="-222" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="right20000" x="1631" y="0" width="313" height="551" frameX="-352" frameY="-228" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="up10000" x="0" y="559" width="310" height="587" frameX="-345" frameY="-193" frameWidth="1000" frameHeight="1000"/>
-	<SubTexture name="up20000" x="676" y="0" width="308" height="573" frameX="-345" frameY="-207" frameWidth="1000" frameHeight="1000"/>
+<!--  Created using the Spritesheet and XML generator  -->
+<!--  https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web  -->
+<SubTexture name="down0000" x="241" y="978" width="241" height="363" frameX="-365" frameY="-407" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="down0001" x="0" y="978" width="241" height="363" frameX="-369" frameY="-396" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="idle0000" x="622" y="446" width="242" height="446" frameX="-366" frameY="-308" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="idle0001" x="864" y="446" width="242" height="446" frameX="-381" frameY="-314" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="idle0002" x="622" y="0" width="242" height="446" frameX="-375" frameY="-306" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="idle0003" x="864" y="0" width="242" height="446" frameX="-388" frameY="-313" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="idle0004" x="864" y="0" width="242" height="446" frameX="-388" frameY="-313" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="left0000" x="311" y="0" width="311" height="488" frameX="-331" frameY="-276" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="left0001" x="0" y="0" width="311" height="488" frameX="-323" frameY="-279" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="right0000" x="1106" y="441" width="242" height="441" frameX="-403" frameY="-322" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="right0001" x="1106" y="0" width="242" height="441" frameX="-372" frameY="-315" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="up0000" x="0" y="488" width="245" height="490" frameX="-377" frameY="-273" frameWidth="1000" frameHeight="1000"/>
+<SubTexture name="up0001" x="245" y="488" width="245" height="490" frameX="-378" frameY="-268" frameWidth="1000" frameHeight="1000"/>
 </TextureAtlas>
